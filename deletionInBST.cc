@@ -62,13 +62,59 @@ Node<int> * maxVal(Node<int>*root){
     }
     return maxVal(root->right);
 }
+
+
+Node<int>* deleteFromBST(Node<int>*root,int x){
+    if(root == NULL){
+        return root;
+    }
+    if(root->data == x){
+        // 0 child
+        if(root->left == NULL && root->right == NULL){
+            delete root;
+            return NULL;
+        }
+        // 1 child
+
+        // for left child
+        if(root->left!=NULL && root->right == NULL){
+            Node<int>* temp = root->left;
+            delete root;
+            return temp;
+        }
+        if(root->left == NULL && root->right!=NULL){
+            Node<int> * temp = root->right;
+            delete root;
+            return temp;
+        }
+        // 2 child
+        if(root->left!=NULL && root->right!=NULL){
+            int mini = minVal(root->right)->data;
+            root->data = mini;
+            root->right = deleteFromBST(root->right,mini);
+            return root;
+        }
+    }
+    else if(root->data < x){
+        root->right = deleteFromBST(root->right,x);
+        return root;
+    }
+    else{
+        root->left = deleteFromBST(root->left,x);
+        return root;
+    }
+    return root;
+}
+
+
 // -1 using to show that the tree end here
-// 10 9 20 15 21 -1
+// 100 50 110 25 70 120 60 115 -1
 int main(){
     Node<int> * root = NULL;
     takeInput(root);
-    printLevelWise(root);
-    
+    Node<int>* ans = deleteFromBST(root,120);
+    printLevelWise(ans);
+
     // cout<<"minValue "<< minVal(root)->data<<endl;
     // cout<<"maxValue "<<maxVal(root)->data<<endl;
 }
