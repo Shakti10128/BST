@@ -46,13 +46,29 @@ void printLevelWise(Node<int>*root){
     }
 }
 
+
+// finding minValue in BST
+Node<int> * minVal(Node<int>*root){
+    if(root->left == NULL){
+        return root;
+    }
+    return minVal(root->left);
+}
+
+// finding maxValue in BST
+Node<int> * maxVal(Node<int>*root){
+    if(root->right == NULL){
+        return root;
+    }
+    return maxVal(root->right);
+}
 // -1 using to show that the tree end here
 // 10 9 20 15 21 -1
 int main(){
-    // taking input using queue
-    // Node<int> * root = takeInput();
-
     Node<int> * root = NULL;
     takeInput(root);
     printLevelWise(root);
+    
+    // cout<<"minValue "<< minVal(root)->data<<endl;
+    // cout<<"maxValue "<<maxVal(root)->data<<endl;
 }
