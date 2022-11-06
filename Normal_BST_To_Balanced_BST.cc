@@ -9,7 +9,7 @@ Node<int> * insertBST(Node<int> * root,int data){
         root = new Node<int>(data);
         return root;
     }
-    if(data>root->data){
+    if(data > root->data){
         root->right = insertBST(root->right,data);
     }
     else{
@@ -84,9 +84,6 @@ Node<int>* balancedBst(Node<int>* root) {
 // -1 using to show that the tree end here
 // 10 9 20 15 21 -1
 int main(){
-    // taking input using queue
-    // Node<int> * root = takeInput();
-
     Node<int> * root = NULL;
     takeInput(root);
     Node<int>* ans = balancedBst(root);
