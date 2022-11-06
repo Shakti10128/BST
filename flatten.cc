@@ -31,19 +31,12 @@ void takeInput(Node<int>* &root){
 
 /*---------------------------printing level wise------------------------------------*/
 void printLevelWise(Node<int>*root){
-    queue<Node<int>*> q;
-    q.push(root);
-    while(!q.empty()){
-        Node<int> * front = q.front();
-        q.pop();
-        cout<<front->data<<" ";
-        if(front->left){
-            q.push(front->left);
-        }
-        if(front->right){
-            q.push(front->right);
-        }
+    if(root == NULL){
+        return;
     }
+    printLevelWise(root->left);
+    cout<<root->data<<" ";
+    printLevelWise(root->right);
 }
 
 /*---------------------------------Flatten BST To A Sorted List----------------------------*/

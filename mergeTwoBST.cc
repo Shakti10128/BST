@@ -31,24 +31,17 @@ void takeInput(Node<int>* &root){
 
 /*---------------------------printing level wise------------------------------------*/
 void printLevelWise(Node<int>*root){
-    queue<Node<int>*> q;
-    q.push(root);
-    while(!q.empty()){
-        Node<int> * front = q.front();
-        q.pop();
-        cout<<front->data<<" ";
-        if(front->left){
-            q.push(front->left);
-        }
-        if(front->right){
-            q.push(front->right);
-        }
+    if(root == NULL){
+        return;
     }
+    printLevelWise(root->left);
+    cout<<root->data<<" ";
+    printLevelWise(root->right);
 }
 
 /*-----------------------------------merge Two BST--------------------------------------*/
 
-void inOrder(TreeNode<int>* root,vector<int> &in){
+void inOrder(Node<int>* root,vector<int> &in){
     if(root == NULL){
         return;
     }
@@ -82,19 +75,19 @@ vector<int> mergeTwoSortedArray(vector<int> &a,vector<int> &b){
     return temp;
 }
 
-TreeNode<int> * mergeTwoBST(int s,int e,vector<int> temp){
+Node<int> * mergeTwoBST(int s,int e,vector<int> temp){
 //     base case
     if(s>e){
         return NULL;
     }
     int mid = (s+e)/2;
-    TreeNode<int> * root = new TreeNode<int>(temp[mid]);
+    Node<int> * root = new Node<int>(temp[mid]);
     root->left = mergeTwoBST(s,mid-1,temp);
     root->right = mergeTwoBST(mid+1,e,temp);
     return root;
 }
 
-TreeNode<int> *mergeBST(TreeNode<int> *root1, TreeNode<int> *root2){
+Node<int> *mergeBST(Node<int> *root1, Node<int> *root2){
     // Write your code here.
     vector<int> a,b;
     inOrder(root1,a);
@@ -108,11 +101,14 @@ TreeNode<int> *mergeBST(TreeNode<int> *root1, TreeNode<int> *root2){
 
 
 // -1 using to show that the tree end here
-// 4 2 7 -1 3 -1 -1 -1 -1  
-// 5 1 7 -1 -1 -1 -1
+// 4 2 7 5 1 8 10 -1 
+// 5 1 7 3 6 8 2 -1
+//Output-> 1 1 2 2 3 4 5 5 6 7 7 8 8 10
 int main(){
     Node<int> * root1 = NULL;
     takeInput(root1);
     Node<int> * root2 = NULL;
     takeInput(root2);
+    Node<int> * root = mergeBST(root1,root2);
+    printLevelWise(root);
 }
