@@ -45,21 +45,21 @@ void printLevelWise(Node<int>*root){
 
 
 // Converting Tree into Sorting Doubly Linked list
-void convertSortedDDL(Node<int>*root,Node<int>* & head){
+void convertSortedLL(Node<int>*root,Node<int>* & head){
     // base case
     if(root == NULL){
         return;
     }
-    convertSortedDDL(root->right,head);
+    convertSortedLL(root->right,head);
     root->right = head;
     if(head!=NULL){
         head->left = root;
     }
     head = root;
-    convertSortedDDL(root->left,head);
+    convertSortedLL(root->left,head);
 }
 
-// Merging two doubly sorting linked list
+// Merging two sorting linked list
 Node<int>* mergeTwoSortedLL(Node<int>* head1,Node<int>*head2){
     Node<int> * head = NULL;
     Node<int>* tail = NULL;
@@ -74,7 +74,7 @@ Node<int>* mergeTwoSortedLL(Node<int>* head1,Node<int>*head2){
             }
             else{
                 tail->right = head1;
-                head1->left = tail;
+                // head1->left = tail;
                 tail = head1;
                 head1 = head1->right;
             }
@@ -88,7 +88,7 @@ Node<int>* mergeTwoSortedLL(Node<int>* head1,Node<int>*head2){
             }
             else{
                 tail->right = head2;
-                head2->left = tail;
+                // head2->left = tail;
                 tail = head2;
                 head2 = head2->right;
             }
@@ -97,14 +97,14 @@ Node<int>* mergeTwoSortedLL(Node<int>* head1,Node<int>*head2){
     // confirming weither the head1 NULL or not, if not then merge into final linked list
     while(head1!=NULL){
         tail->right = head1;
-        head1->left = tail;
+        // head1->left = tail;
         tail = head1;
         head1 = head1->right;
     }
     // confirming weither the head2 NULL or not, if not then merge into final linked list
     while(head2!=NULL){
         tail->right = head2;
-        head2->left = tail;
+        // head2->left = tail;
         tail = head2;
         head2 = head2->right;
     }
@@ -216,10 +216,8 @@ int main(){
     /*--------if interviewer say to you that solve this question in O(h) space complexity then use this approach---------*/
     Node<int> * head1 = NULL;
     Node<int> * head2 = NULL;
-    convertSortedDDL(root1,head1);
-    head1->left = NULL;
-    convertSortedDDL(root2,head2);
-    head2->left = NULL;
+    convertSortedLL(root1,head1);
+    convertSortedLL(root2,head2);
     Node<int> * head = mergeTwoSortedLL(head1,head2);
     int length = findLength(head);
     Node<int> * root = SortedLLToBST(head,length);
