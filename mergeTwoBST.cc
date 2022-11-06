@@ -44,7 +44,7 @@ void printLevelWise(Node<int>*root){
 // if interviewer say to you that solve this question in O(h) space complexity then use this approach
 
 
-// Converting Tree into Sorting Doubly Linked list
+// Converting Tree into Sorting  Linked list
 void convertSortedLL(Node<int>*root,Node<int>* & head){
     // base case
     if(root == NULL){
@@ -111,7 +111,7 @@ Node<int>* mergeTwoSortedLL(Node<int>* head1,Node<int>*head2){
     return  head;
 }
 
-// finding the length of SortedDLL
+// finding the length of SortedLL
 int findLength(Node<int>* head){
     Node<int>* temp = head;
     int len = 0;
