@@ -29,7 +29,8 @@ void takeInput(Node<int>* &root){
     }
 }
 
-/*---------------------------printing level wise------------------------------------*/
+/*---------------------------printing BST ------------------------------------*/
+// We all know that the inOrder of BST is sorted
 void printLevelWise(Node<int>*root){
     if(root == NULL){
         return;
