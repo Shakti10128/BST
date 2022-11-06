@@ -224,8 +224,4 @@ int main(){
     int length = findLength(head);
     Node<int> * root = SortedLLToBST(head,length);
     printLevelWise(root);
-    while(head!=NULL){
-        cout<<head->data<<" ";
-        head = head->right;
-    }
 }
