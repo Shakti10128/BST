@@ -2,34 +2,34 @@
 #include"BST_Class.cc"
 using namespace std;
 
-/*------------------------taking input of BST by following BST terms-----------------------*/
+/*------------------------taking input of BST as inOrder-----------------------*/
 
-Node<int> * insertBST(Node<int> * root,int data){
-    if(root == NULL){
-        root = new Node<int>(data);
-        return root;
+Node<int> * BST(int s,int e,vector<int> ans){
+    if(s>e){
+        return NULL;
     }
-    if(data>root->data){
-        root->right = insertBST(root->right,data);
-    }
-    else{
-        root->left = insertBST(root->left,data);
-    }
+    int mid = (s+e)/2;
+    Node<int> * root = new Node<int>(ans[mid]);
+    root->left = BST(s,mid-1,ans);
+    root->right = BST(mid+1,e,ans);
     return root;
 }
 
-void takeInput(Node<int>* &root){
+Node<int>* takeInput(){
     int data;
     cout<<"Enter data"<<endl;
     cin>>data;
+    vector<int> ans;
     while(data!=-1){
-        root = insertBST(root,data);
-        cout<<"Enter data"<<endl;
+        ans.push_back(data);
         cin>>data;
     }
+    int s = 0;
+    int e = ans.size()-1;
+    return BST(s,e,ans);
 }
 
-/*---------------------------printing BST ------------------------------------*/
+/*---------------------------printing BST------------------------------------*/
 // We all know that the inOrder of BST is sorted
 void printLevelWise(Node<int>*root){
     if(root == NULL){
@@ -42,10 +42,9 @@ void printLevelWise(Node<int>*root){
 
 
 
-// -1 using to show that the tree end here
-// 10 9 20 15 21 -1
+// Taking input as inOrder use -1 to indicate that your inOrder ends here
+// 2 3 4 5 6 7 8 9 10 -1
 int main(){
-    Node<int> * root = NULL;
-    takeInput(root);
+    Node<int> * root = takeInput();
     printLevelWise(root);
 }
